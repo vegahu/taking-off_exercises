@@ -9,14 +9,14 @@ defmodule Converter do
   end
 
   def to_light_seconds({:miles, miles}) do
-    (miles * 5.36819e-6) |> round_down
+    (miles * 5.36819e-6) |> round_up
   end
 
   def to_light_seconds({:meters, meters})  do
-    (meters * 3.335638620368e-9) |> round_down
+    (meters * 3.335638620368e-9) |> round_up
   end
 
-  def round_down(val) when is_float(val), do: trunc(val)
+  def round_up(val) when is_float(val), do: trunc(val)
 end
 
 
