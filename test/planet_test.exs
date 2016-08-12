@@ -21,16 +21,6 @@ defmodule PlanetTest do
     assert venus.ev == 7.2
   end
 
-  test "escape velocity of earth is correct" do
-    ev = Planet.escape_velocity
-    assert ev == 11.2 
-  end
-
-  test "escape velocity of mars is correct" do
-    ev = Planet.escape_velocity(Planet.select[:mars])
-    assert ev == 5.0 #what should this value be?
-  end
-
   test "Enum at", %{planets: planets} do
     p = Enum.at(planets, 2)
     assert p.name == "Earth"
@@ -48,25 +38,23 @@ defmodule PlanetTest do
 
   test "Enum.map", %{planets: planets} do
     p = Enum.map(planets, &(&1.name))
-    #this should be a list of names... assert for me?
+    assert p == ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
   end
 
   test "a comprehension", %{planets: planets} do
-    planet_names = for planet <- planets, do: planet.name  
-    IO.inspect planet_names
-    #this should be a list of names... assert for me?
+    planet_names = for planet <- planets, do: planet.name
+    assert planet_names == ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
   end
 
   test "a comprehension with a filter", %{planets: planets} do
-    planet_names = for planet <- planets, planet.type == :rocky, do: planet.name  
-    IO.inspect planet_names
-    #this should be a list of names... assert for me?
+    planet_names = for planet <- planets, planet.type == :rocky, do: planet.name
+    assert planet_names == ["Mercury", "Venus", "Earth", "Mars"]
   end
 
   test "a comprehension with a filter, matched", %{planets: planets} do
-    planet_names = for %{name: name, type: type} <- planets, type == :rocky, do: name  
-    IO.inspect planet_names
-    #this should be a list of names... assert for me?
+    planet_names = for %{name: name, type: type} <- planets, type == :rocky, do: name
+    assert planet_names == ["Mercury", "Venus", "Earth", "Mars"]
+
   end
 
 end
