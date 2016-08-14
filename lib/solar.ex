@@ -1,7 +1,8 @@
 defmodule Solar do
-  def power(%{classification: :M, scale: s}), do: s * 10 * 0.92
-  def power(%{classification: :X, scale: s}), do: s * 1000 * 0.68
-  def power(%{classification: :C, scale: s}), do: s * 0.78
+  def power(%{classification: :M, scale: s}), do: s * 10
+  def power(%{classification: :X, scale: s, stations: c}) when c < 5, do: s * 1000 * 1.1
+  def power(%{classification: :X, scale: s, stations: c}) when c >= 5, do: s * 1000
+  def power(%{classification: :C, scale: s}), do: s
 
   def no_eva(flares) do
     Enum.filter flares, fn(flare) ->

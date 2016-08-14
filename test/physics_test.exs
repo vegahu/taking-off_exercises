@@ -2,17 +2,17 @@ defmodule PhysicsTest do
   use ExUnit.Case
 
   test "escape velocity of earth is correct" do
-    ev = Planets.escape_velocity(Planets.select[:earth])
+    ev = Planet.escape_velocity(Planet.select[:earth])
     assert ev == 11.2 #what should this value be?
   end
 
   test "escape velocity of mars is correct" do
-    ev = Planets.escape_velocity(Planets.select[:mars])
+    ev = Planet.escape_velocity(Planet.select[:mars])
     assert ev == 5.0 #what should this value be?
   end
 
   test "escape velocity of planet X is correct" do
-    ev =  %{mass: 4.0e22, radius: 6.21e6} |> Planets.escape_velocity
+    ev =  %{mass: 4.0e22, radius: 6.21e6} |> Planet.escape_velocity
     assert ev == 0.9
     #use assert here
   end

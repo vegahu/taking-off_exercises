@@ -3,9 +3,9 @@ defmodule Physics.Rocketry do
   import Calcs
   import Converter
   import Physics.Laws
-  import Planets
+  import Planet
 
-  @earth Planets.select[:earth]
+  @earth Planet.select[:earth]
 
   def orbital_speed(height), do: orbital_speed(@earth, height)
   def orbital_speed(planet, height) do
