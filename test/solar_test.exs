@@ -26,9 +26,28 @@ defmodule SolarTest do
   end
 
   test "the deadliest flare", %{data: flares} do
-    death = Solar.deadliest(flares) |> IO.inspect
-    assert death == 99000 #hmmm
+    death = Solar.deadliest(flares)
+    assert death == 67320 # 99000
   end
 
+  test "total flare power using recursion", %{data: flares} do
+    total = Solar.total_flare_power(flares) |> IO.inspect
+    assert total = 147717.966
+  end
+
+  test "total flare power using enums", %{data: flares} do
+    # Hey! Why is this answer different! Can you adjust this function for me?
+    # adding the tolerant factor to power/1 functions sovels de problem, and made deadliest flare goes to 67320
+    total = Solar.total_flare_power_enum(flares) |> IO.inspect
+    assert total == 147717.966
+  end
+
+  test "a flare list with comprehensions", %{data: flares} do
+    Solar.flare_list(flares) |> IO.inspect
+  end
+
+  test "a flare list with enums", %{data: flares} do
+    Solar.flare_list_enums(flares) |> IO.inspect
+  end
 
 end
