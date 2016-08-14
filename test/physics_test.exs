@@ -2,34 +2,19 @@ defmodule PhysicsTest do
   use ExUnit.Case
 
   test "escape velocity of earth is correct" do
-    ev = Physics.Rocketry.escape_velocity(:earth)
+    ev = Planets.escape_velocity(Planets.select[:earth])
     assert ev == 11.2 #what should this value be?
   end
 
   test "escape velocity of mars is correct" do
-    ev = Physics.Rocketry.escape_velocity(:mars)
+    ev = Planets.escape_velocity(Planets.select[:mars])
     assert ev == 5.0 #what should this value be?
   end
 
-  test "escape velocity of moon is correct" do
-    ev = Physics.Rocketry.escape_velocity(:moon)
-    assert ev == 2.4 #what should this value be?
-  end
-
   test "escape velocity of planet X is correct" do
-    ev =  %{mass: 4.0e22, radius: 6.21e6} |> Physics.Rocketry.escape_velocity
+    ev =  %{mass: 4.0e22, radius: 6.21e6} |> Planets.escape_velocity
     assert ev == 0.9
     #use assert here
-  end
-
-  test "Converting to to_light_seconds" do
-    ls = Converter.to_light_seconds({:miles, 1000}, precision: 5)
-    assert ls == 0.00537
-  end
-
-  test "Converter one works" do
-    ls = Converter.to_light_seconds({:miles, 1000}, precision: 5)
-    assert ls == 0.00537
   end
 
   test "Orbital acceleration for earth at 100km" do
@@ -37,14 +22,4 @@ defmodule PhysicsTest do
     assert orbital_acc == 9.515619587729839
   end
 
-  test "Orbital radius for an Orbital Term of 4 hours" do
-    ev = Physics.Rocketry.height_for_term(4)
-    assert ev == 12790
-  end
-
-  test "Orbital term for 100km above earth" do
-    term = Physics.Rocketry.orbital_term(100) # For 100 Km is 1.4, always false, cierto a partir de 6419 Km (sin redondeo a nearest_tenth)
-    assert (term > 4) == (term < 5) #crap fix this!
-  end
-  
 end
